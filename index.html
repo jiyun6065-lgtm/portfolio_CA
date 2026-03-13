@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jiyun Na — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Sora:wght@300;400;500;600&family=Noto+Serif+KR:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #faf7f2;
+      --bg-warm: #f3ede4;
+      --text: #2c2824;
+      --text-light: #7a7168;
+      --text-lighter: #a89f94;
+      --accent: #6b8f71;
+      --accent-light: #a3c4a8;
+      --accent-warm: #c4a882;
+      --border: #e4ddd3;
+      --grain-opacity: 0.03;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Film grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: var(--grain-opacity);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 128px 128px;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.5s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(250, 247, 242, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 3rem;
+    }
+
+    nav .logo {
+      font-family: 'Noto Serif KR', serif;
+      font-weight: 500;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    nav .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    nav .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    nav .nav-links a:hover {
+      color: var(--text);
+    }
+
+    nav .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ──────────── HERO ──────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+    }
+
+    .hero-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-lighter);
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+
+    .hero h1 {
+      font-family: 'Noto Serif KR', serif;
+      font-weight: 300;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-light);
+      max-width: 500px;
+      margin-bottom: 3rem;
+    }
+
+    .hero-line {
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, var(--border), transparent);
+      margin-top: 2rem;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 3rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-lighter);
+      writing-mode: vertical-rl;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    /* ──────────── SECTIONS ──────────── */
+    section {
+      padding: 8rem 3rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-lighter);
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: var(--text-lighter);
+    }
+
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.3;
+      margin-bottom: 2rem;
+      max-width: 700px;
+    }
+
+    /* ──────────── ABOUT ──────────── */
+    .about {
+      background: var(--bg);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 400px;
+    }
+
+    .about-visual .dna-art {
+      width: 200px;
+      height: 350px;
+      position: relative;
+    }
+
+    .dna-strand {
+      position: absolute;
+      width: 4px;
+      border-radius: 2px;
+      opacity: 0.15;
+      animation: dna-float 6s ease-in-out infinite;
+    }
+
+    @keyframes dna-float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+
+    .quote-block {
+      border-left: 2px solid var(--accent-light);
+      padding-left: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .quote-block p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ──────────── EDUCATION ──────────── */
+    .education {
+      background: var(--bg-warm);
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 3rem;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1px 1fr;
+      gap: 3rem;
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .timeline-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--accent);
+      text-align: right;
+      line-height: 1;
+      padding-top: 0.2rem;
+    }
+
+    .timeline-line {
+      background: var(--accent-light);
+      width: 1px;
+      position: relative;
+    }
+
+    .timeline-line::before {
+      content: '';
+      position: absolute;
+      top: 0.5rem;
+      left: -3.5px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .timeline-content h3 {
+      font-family: 'Noto Serif KR', serif;
+      font-weight: 500;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .timeline-content p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .timeline-tag {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(107, 143, 113, 0.08);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+    }
+
+    /* ──────────── INTERESTS ──────────── */
+    .interests {
+      background: var(--bg);
+    }
+
+    .interests-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .interest-card {
+      padding: 3rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .interest-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+    }
+
+    .interest-card:hover {
+      border-color: var(--accent-light);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(44, 40, 36, 0.06);
+    }
+
+    .interest-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .interest-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .interest-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .interest-card p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.8;
+    }
+
+    /* ──────────── CONNECT ──────────── */
+    .connect {
+      background: var(--bg-warm);
+      text-align: center;
+      padding: 10rem 3rem;
+    }
+
+    .connect .section-label {
+      justify-content: center;
+    }
+
+    .connect .section-label::before {
+      display: none;
+    }
+
+    .connect-heading {
+      font-family: 'Noto Serif KR', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      margin-bottom: 2rem;
+      letter-spacing: -0.03em;
+    }
+
+    .connect-text {
+      font-size: 1rem;
+      color: var(--text-light);
+      max-width: 420px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+    }
+
+    .connect-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      border: 1px solid var(--text);
+      border-radius: 2px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .connect-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--text);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .connect-link span,
+    .connect-link svg {
+      position: relative;
+      z-index: 1;
+      transition: color 0.4s ease;
+    }
+
+    .connect-link:hover::before {
+      transform: translateY(0);
+    }
+
+    .connect-link:hover span,
+    .connect-link:hover svg {
+      color: var(--bg);
+    }
+
+    .connect-link:hover svg path {
+      fill: var(--bg);
+    }
+
+    /* ──────────── FOOTER ──────────── */
+    footer {
+      padding: 2rem 3rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-lighter);
+      letter-spacing: 0.05em;
+    }
+
+    /* ──────────── CINEMATIC WIPE ──────────── */
+    .cinematic-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 0;
+      background: var(--text);
+      z-index: 10000;
+      animation: wipe 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+    }
+
+    .cinematic-bar.top {
+      top: 0;
+      transform-origin: top;
+    }
+
+    .cinematic-bar.bottom {
+      bottom: 0;
+      transform-origin: bottom;
+    }
+
+    @keyframes wipe {
+      0% { height: 50vh; }
+      100% { height: 0; }
+    }
+
+    /* ──────────── RESPONSIVE ──────────── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      nav.scrolled { padding: 0.75rem 1.5rem; }
+      nav .nav-links { gap: 1.5rem; }
+      nav .nav-links a { font-size: 0.7rem; }
+
+      section { padding: 5rem 1.5rem; }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .about-visual { display: none; }
+
+      .timeline-item {
+        grid-template-columns: 80px 1px 1fr;
+        gap: 1.5rem;
+      }
+
+      .timeline-year { font-size: 1.8rem; }
+
+      .interests-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .interest-card { padding: 2rem; }
+
+      .connect { padding: 6rem 1.5rem; }
+
+      .hero-scroll { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cinematic opening wipe -->
+  <div class="cinematic-bar top"></div>
+  <div class="cinematic-bar bottom"></div>
+
+  <!-- Navigation -->
+  <nav id="nav">
+    <div class="logo">Jiyun Na</div>
+    <ul class="nav-links">
+      <li><a href="#about">소개</a></li>
+      <li><a href="#education">교육</a></li>
+      <li><a href="#interests">관심 분야</a></li>
+      <li><a href="#connect">연락</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-label reveal">Portfolio</div>
+    <h1 class="reveal reveal-delay-1">Jiyun Na</h1>
+    <p class="hero-subtitle reveal reveal-delay-2">
+      Exploring where biology meets computation,<br>
+      one question at a time.
+    </p>
+    <div class="hero-line reveal reveal-delay-3"></div>
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="section-inner">
+      <div class="section-label reveal">About</div>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2 class="section-heading reveal">
+            과학의 언어로 생명을 읽다
+          </h2>
+          <p class="reveal reveal-delay-1">
+            안녕하세요, 나지윤입니다. 용인한국외국어대학교부설고등학교에 재학 중이며,
+            뇌과학과 데이터의 교차점에서 새로운 가능성을 탐구하고 있습니다.
+          </p>
+          <p class="reveal reveal-delay-2">
+            유전자 데이터 속에 숨겨진 패턴을 찾고, 뇌의 복잡한 네트워크를
+            이해하려는 여정 위에 서 있습니다. 코드와 과학이 만나는 곳에서
+            아직 풀리지 않은 질문들을 마주하는 순간, 그 너머를 기대합니다.
+          </p>
+          <div class="quote-block reveal reveal-delay-3">
+            <p>"The brain is the last and grandest biological frontier."</p>
+          </div>
+        </div>
+        <div class="about-visual reveal reveal-delay-2">
+          <canvas id="dna-canvas" width="280" height="400"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="education" id="education">
+    <div class="section-inner">
+      <div class="section-label reveal">Education</div>
+      <h2 class="section-heading reveal">배움의 여정</h2>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-year">현재</div>
+          <div class="timeline-line"></div>
+          <div class="timeline-content">
+            <h3>용인한국외국어대학교부설고등학교</h3>
+            <p>창의성과 과학적 사고를 겸비한 글로벌 인재를 향해 나아가고 있습니다.</p>
+            <span class="timeline-tag">재학 중</span>
+          </div>
+        </div>
+        <div class="timeline-item reveal reveal-delay-1">
+          <div class="timeline-year">졸업</div>
+          <div class="timeline-line"></div>
+          <div class="timeline-content">
+            <h3>양영중학교</h3>
+            <p>과학에 대한 첫 호기심을 키운 곳. 이곳에서 생명과학과 데이터에 대한 관심이 시작되었습니다.</p>
+            <span class="timeline-tag">졸업</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interests -->
+  <section class="interests" id="interests">
+    <div class="section-inner">
+      <div class="section-label reveal">Interests</div>
+      <h2 class="section-heading reveal">탐구하는 세계</h2>
+      <div class="interests-grid">
+        <div class="interest-card reveal">
+          <div class="interest-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <path d="M24 4C20 4 17 8 17 14C17 20 20 26 24 30C28 26 31 20 31 14C31 8 28 4 24 4Z" stroke="#6b8f71" stroke-width="1.5" fill="none"/>
+              <path d="M24 30C24 30 18 34 18 38C18 42 20 44 24 44C28 44 30 42 30 38C30 34 24 30 24 30Z" stroke="#6b8f71" stroke-width="1.5" fill="none"/>
+              <line x1="24" y1="14" x2="24" y2="44" stroke="#6b8f71" stroke-width="1" opacity="0.3"/>
+              <circle cx="24" cy="18" r="2" fill="#6b8f71" opacity="0.2"/>
+              <circle cx="24" cy="24" r="1.5" fill="#6b8f71" opacity="0.2"/>
+            </svg>
+          </div>
+          <h3>Bioinformatics</h3>
+          <p>
+            생물학적 데이터를 컴퓨터 과학의 렌즈로 분석하는 생물정보학.
+            유전체 서열 분석, 단백질 구조 예측, 그리고 데이터 기반의
+            생명과학 연구에 깊은 관심을 가지고 있습니다.
+          </p>
+        </div>
+        <div class="interest-card reveal reveal-delay-1">
+          <div class="interest-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <ellipse cx="24" cy="22" rx="14" ry="12" stroke="#6b8f71" stroke-width="1.5" fill="none"/>
+              <path d="M16 18C18 16 20 15 24 15C28 15 30 16 32 18" stroke="#6b8f71" stroke-width="1" opacity="0.4"/>
+              <path d="M18 24C20 26 22 27 24 27C26 27 28 26 30 24" stroke="#6b8f71" stroke-width="1" opacity="0.4"/>
+              <circle cx="20" cy="20" r="1" fill="#6b8f71" opacity="0.5"/>
+              <circle cx="28" cy="20" r="1" fill="#6b8f71" opacity="0.5"/>
+              <circle cx="24" cy="24" r="1" fill="#6b8f71" opacity="0.5"/>
+              <path d="M20 20L24 24L28 20" stroke="#6b8f71" stroke-width="0.75" opacity="0.3"/>
+              <path d="M24 34L24 40" stroke="#6b8f71" stroke-width="1.5"/>
+              <path d="M20 42L24 40L28 42" stroke="#6b8f71" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+          <h3>Brain Science</h3>
+          <p>
+            인간의 뇌는 우주에서 가장 복잡한 구조입니다.
+            신경과학과 인지과학의 최전선에서 의식, 기억, 그리고
+            뇌의 신비를 밝히는 연구에 매력을 느낍니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Connect -->
+  <section class="connect" id="connect">
+    <div class="section-label reveal">Connect</div>
+    <h2 class="connect-heading reveal reveal-delay-1">연락주세요</h2>
+    <p class="connect-text reveal reveal-delay-2">
+      새로운 아이디어, 협업, 또는 단순한 인사도 환영합니다.
+    </p>
+    <a href="https://www.instagram.com/u.oxen/" target="_blank" rel="noopener noreferrer" class="connect-link reveal reveal-delay-3">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+      </svg>
+      <span>@u.oxen</span>
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 나지윤. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ──────── Scroll reveal ────────
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // ──────── Nav scroll effect ────────
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ──────── DNA Helix Canvas ────────
+    const canvas = document.getElementById('dna-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      let time = 0;
+
+      function drawHelix() {
+        ctx.clearRect(0, 0, w, h);
+
+        const cx = w / 2;
+        const amplitude = 50;
+        const steps = 30;
+        const spacing = h / steps;
+
+        for (let i = 0; i < steps; i++) {
+          const y = i * spacing;
+          const phase = (i * 0.3) + time;
+
+          const x1 = cx + Math.sin(phase) * amplitude;
+          const x2 = cx + Math.sin(phase + Math.PI) * amplitude;
+
+          // Connecting bars
+          const alpha = 0.08 + Math.abs(Math.sin(phase)) * 0.07;
+          ctx.beginPath();
+          ctx.moveTo(x1, y);
+          ctx.lineTo(x2, y);
+          ctx.strokeStyle = `rgba(107, 143, 113, ${alpha})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          // Strand 1 dots
+          const depth1 = (Math.sin(phase) + 1) / 2;
+          const r1 = 2.5 + depth1 * 2;
+          ctx.beginPath();
+          ctx.arc(x1, y, r1, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(107, 143, 113, ${0.15 + depth1 * 0.35})`;
+          ctx.fill();
+
+          // Strand 2 dots
+          const depth2 = (Math.sin(phase + Math.PI) + 1) / 2;
+          const r2 = 2.5 + depth2 * 2;
+          ctx.beginPath();
+          ctx.arc(x2, y, r2, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(196, 168, 130, ${0.15 + depth2 * 0.35})`;
+          ctx.fill();
+        }
+
+        time += 0.008;
+        requestAnimationFrame(drawHelix);
+      }
+
+      drawHelix();
+    }
+  </script>
+
+</body>
+</html>
+
+이 코드 설명해줘
