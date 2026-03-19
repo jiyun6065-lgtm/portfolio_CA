@@ -445,11 +445,13 @@
       line-height: 1.8;
     }
 /* ==========================================
-   RESEARCH SECTION (Education 스타일 통일)
+   RESEARCH SECTION (Color & Style Unified)
    ========================================== */
 
 .research {
-  background: var(--bg-light); /* 혹은 var(--bg-warm) */
+  /* Education과 동일한 배경색 혹은 대비를 위한 미세한 차이 */
+  background: var(--bg-warm); 
+  border-top: 1px solid var(--border);
 }
 
 .research-container {
@@ -461,35 +463,37 @@
 
 .research-item {
   display: grid;
-  /* Education과 동일한 140px - 선 - 나머지 구조 */
+  /* 왼쪽 연도/상태(140px) - 중앙 선(1px) - 오른쪽 본문(1fr) */
   grid-template-columns: 140px 1px 1fr;
   gap: 3rem;
   padding: 3rem 0;
   border-bottom: 1px solid var(--border);
 }
 
+/* 첫 번째 아이템의 상단 테두리 처리 */
 .research-item:first-child {
   border-top: 1px solid var(--border);
 }
 
-/* 상태 표시 (현재/완료) - 타임라인의 '연도'와 같은 스타일 */
+/* 왼쪽 상태 텍스트: Education의 .timeline-year와 동일 색상 */
 .research-status {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem; /* 연도보다는 살짝 작게 조절 */
+  font-size: 2.2rem; /* 연도보다 약간 작게 조절하여 균형 유지 */
   font-weight: 300;
-  color: var(--accent);
+  color: var(--accent); /* 메인 포인트 컬러 */
   text-align: right;
   line-height: 1;
   padding-top: 0.2rem;
 }
 
-/* 타임라인 선 유지 */
+/* 수직 타임라인 선: Education과 동일 */
 .research-line {
   background: var(--accent-light);
   width: 1px;
   position: relative;
 }
 
+/* 선 위의 동그란 포인트 */
 .research-line::before {
   content: '';
   position: absolute;
@@ -501,43 +505,47 @@
   background: var(--accent);
 }
 
-/* 연구 내용 스타일 */
+/* 연구 제목: Education의 h3와 동일 */
 .research-content h3 {
   font-family: 'Noto Serif KR', serif;
   font-weight: 500;
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   margin-bottom: 0.5rem;
+  color: var(--text-main); /* 혹은 기본 텍스트 색상 */
   letter-spacing: -0.01em;
   line-height: 1.4;
 }
 
+/* 연구 부제목 */
 .research-content .subtitle {
   display: block;
-  font-size: 1.1rem;
-  color: var(--text-light);
-  margin-top: -0.3rem;
-  margin-bottom: 0.8rem;
+  font-size: 1.05rem;
+  color: var(--text-light); /* 보조 텍스트 색상 */
+  margin-top: -0.2rem;
+  margin-bottom: 1rem;
   font-weight: 400;
 }
 
+/* 연구 상세 설명: Education의 p와 동일 */
 .research-content p {
   color: var(--text-light);
   font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
-/* 하단 태그 스타일 */
+/* 태그 스타일: Education의 .timeline-tag와 동일 색상 구성 */
 .research-tag {
   display: inline-block;
   margin-top: 1rem;
-  margin-right: 0.5rem;
+  margin-right: 0.6rem;
   font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent);
-  background: rgba(107, 143, 113, 0.08); /* 기존과 동일한 은은한 초록빛 */
+  background: rgba(107, 143, 113, 0.08); /* accent 컬러 기반의 투명 배경 */
   padding: 0.3rem 0.8rem;
   border-radius: 2px;
+  border: 1px solid rgba(107, 143, 113, 0.15); /* 미세한 테두리로 완성도 상향 */
 }
 
     /* ──────────── CONNECT ──────────── */
