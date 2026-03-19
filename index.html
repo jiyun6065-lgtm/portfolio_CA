@@ -445,37 +445,110 @@
       line-height: 1.8;
     }
 
-<section class="research education" id="research" style="border-top: 1px solid var(--border);">
-  <div class="section-inner">
-    <div class="section-label reveal">Research</div>
-    <h2 class="section-heading reveal">연구 및 탐구 활동</h2>
-    
-    <div class="timeline"> <div class="timeline-item reveal">
-        <div class="timeline-year">Ongoing</div>
-        <div class="timeline-line"></div>
-        <div class="timeline-content">
-          <h3>뉴런의 전기적 특성 모델링 연구</h3>
-          <p>신경세포의 전기적 신호 전달 메커니즘을 수학적 모델링을 통해 시뮬레이션하고 분석합니다.</p>
-          <span class="timeline-tag">신경과학</span>
-          <span class="timeline-tag">Modeling</span>
-        </div>
-      </div>
 
-      <div class="timeline-item reveal reveal-delay-1">
-        <div class="timeline-year">2023</div>
-        <div class="timeline-line"></div>
-        <div class="timeline-content">
-          <h3>숏폼 시청 직후의 뇌파 동태와 인지 제어 능력의 신경과학적 분석</h3>
-          <p style="margin-top: -0.3rem; margin-bottom: 0.5rem; opacity: 0.8;">: 학습 효율성을 중심으로</p>
-          <p>EEG 장비를 활용하여 숏폼 자극이 실제 주의력 및 학습 인지 제어에 미치는 영향을 분석했습니다.</p>
-          <span class="timeline-tag">EEG</span>
-          <span class="timeline-tag">Cognitive</span>
-        </div>
-      </div>
+  /*연구*/
 
-    </div>
-  </div>
-</section>
+/* ==========================================
+   RESEARCH SECTION (첫 번째 카드형 디자인)
+   ========================================== */
+
+.research {
+  padding: 80px 0;
+  background-color: var(--bg-warm); /* Education과 동일 배경 */
+}
+
+.research-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* 카드 사이 간격 */
+  margin-top: 40px;
+}
+
+.research-item {
+  background: #ffffff; /* 카드 배경은 깔끔한 흰색 (혹은 var(--bg-light)) */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  transition: all 0.3s ease;
+  border-left: 6px solid transparent; /* 강조 선 */
+}
+
+.research-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* 색상 통일 포인트 */
+.research-item.ongoing { border-left-color: var(--accent); } /* 진행중: 강조색 */
+.research-item.completed { border-left-color: var(--border); } /* 완료: 테두리색 */
+
+.research-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* 배지 색상 통일 */
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.status-badge.ongoing { 
+  background: rgba(107, 143, 113, 0.1); 
+  color: var(--accent); 
+}
+
+.status-badge.completed { 
+  background: #f5f5f5; 
+  color: var(--text-light); 
+}
+
+.research-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.research-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--text-main);
+  margin-bottom: 10px;
+}
+
+.research-subtitle {
+  display: block;
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-top: -5px;
+  margin-bottom: 15px;
+}
+
+.research-desc {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* 하단 태그 스타일 */
+.tag {
+  display: inline-block;
+  background: rgba(107, 143, 113, 0.05);
+  color: var(--accent);
+  padding: 3px 10px;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  margin-right: 8px;
+  border: 1px solid rgba(107, 143, 113, 0.1);
+}
+
 
     /* ──────────── CONNECT ──────────── */
     .connect {
