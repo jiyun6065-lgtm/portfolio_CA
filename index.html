@@ -444,109 +444,38 @@
       color: var(--text-light);
       line-height: 1.8;
     }
-/* ==========================================
-   RESEARCH SECTION (Color & Style Unified)
-   ========================================== */
 
-.research {
-  /* Education과 동일한 배경색 혹은 대비를 위한 미세한 차이 */
-  background: var(--bg-warm); 
-  border-top: 1px solid var(--border);
-}
+<section class="research education" id="research" style="border-top: 1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-label reveal">Research</div>
+    <h2 class="section-heading reveal">연구 및 탐구 활동</h2>
+    
+    <div class="timeline"> <div class="timeline-item reveal">
+        <div class="timeline-year">Ongoing</div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h3>뉴런의 전기적 특성 모델링 연구</h3>
+          <p>신경세포의 전기적 신호 전달 메커니즘을 수학적 모델링을 통해 시뮬레이션하고 분석합니다.</p>
+          <span class="timeline-tag">신경과학</span>
+          <span class="timeline-tag">Modeling</span>
+        </div>
+      </div>
 
-.research-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin-top: 3rem;
-}
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h3>숏폼 시청 직후의 뇌파 동태와 인지 제어 능력의 신경과학적 분석</h3>
+          <p style="margin-top: -0.3rem; margin-bottom: 0.5rem; opacity: 0.8;">: 학습 효율성을 중심으로</p>
+          <p>EEG 장비를 활용하여 숏폼 자극이 실제 주의력 및 학습 인지 제어에 미치는 영향을 분석했습니다.</p>
+          <span class="timeline-tag">EEG</span>
+          <span class="timeline-tag">Cognitive</span>
+        </div>
+      </div>
 
-.research-item {
-  display: grid;
-  /* 왼쪽 연도/상태(140px) - 중앙 선(1px) - 오른쪽 본문(1fr) */
-  grid-template-columns: 140px 1px 1fr;
-  gap: 3rem;
-  padding: 3rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-/* 첫 번째 아이템의 상단 테두리 처리 */
-.research-item:first-child {
-  border-top: 1px solid var(--border);
-}
-
-/* 왼쪽 상태 텍스트: Education의 .timeline-year와 동일 색상 */
-.research-status {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.2rem; /* 연도보다 약간 작게 조절하여 균형 유지 */
-  font-weight: 300;
-  color: var(--accent); /* 메인 포인트 컬러 */
-  text-align: right;
-  line-height: 1;
-  padding-top: 0.2rem;
-}
-
-/* 수직 타임라인 선: Education과 동일 */
-.research-line {
-  background: var(--accent-light);
-  width: 1px;
-  position: relative;
-}
-
-/* 선 위의 동그란 포인트 */
-.research-line::before {
-  content: '';
-  position: absolute;
-  top: 0.5rem;
-  left: -3.5px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-/* 연구 제목: Education의 h3와 동일 */
-.research-content h3 {
-  font-family: 'Noto Serif KR', serif;
-  font-weight: 500;
-  font-size: 1.35rem;
-  margin-bottom: 0.5rem;
-  color: var(--text-main); /* 혹은 기본 텍스트 색상 */
-  letter-spacing: -0.01em;
-  line-height: 1.4;
-}
-
-/* 연구 부제목 */
-.research-content .subtitle {
-  display: block;
-  font-size: 1.05rem;
-  color: var(--text-light); /* 보조 텍스트 색상 */
-  margin-top: -0.2rem;
-  margin-bottom: 1rem;
-  font-weight: 400;
-}
-
-/* 연구 상세 설명: Education의 p와 동일 */
-.research-content p {
-  color: var(--text-light);
-  font-size: 0.95rem;
-  line-height: 1.7;
-}
-
-/* 태그 스타일: Education의 .timeline-tag와 동일 색상 구성 */
-.research-tag {
-  display: inline-block;
-  margin-top: 1rem;
-  margin-right: 0.6rem;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: rgba(107, 143, 113, 0.08); /* accent 컬러 기반의 투명 배경 */
-  padding: 0.3rem 0.8rem;
-  border-radius: 2px;
-  border: 1px solid rgba(107, 143, 113, 0.15); /* 미세한 테두리로 완성도 상향 */
-}
+    </div>
+  </div>
+</section>
 
     /* ──────────── CONNECT ──────────── */
     .connect {
