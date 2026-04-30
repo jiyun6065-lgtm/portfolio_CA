@@ -1,0 +1,40 @@
+:root {
+  --bg: #faf7f2;
+  --bg-warm: #f3ede4;
+  --text: #2c2824;
+  --text-light: #7a7168;
+  --text-lighter: #a89f94;
+  --accent: #6b8f71;
+  --accent-light: #a3c4a8;
+  --accent-warm: #c4a882;
+  --border: #e4ddd3;
+  --grain-opacity: 0.03;
+}
+
+/* [기존 코드의 모든 CSS 내용이 여기에 위치합니다] */
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Sora', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* 필름 그레인 효과 */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* ... 나머지 CSS (nav, hero, section, animations 등) ... */
