@@ -1,10 +1,10 @@
-// ──────── Nav 스크롤 효과 ────────
+// 1. 네비게이션 스크롤 효과 [cite: 280, 281]
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
 });
 
-// ──────── DNA Helix Canvas ────────
+// 2. DNA Helix 애니메이션 (Canvas) [cite: 282, 283, 284]
 const canvas = document.getElementById('dna-canvas');
 if (canvas) {
     const ctx = canvas.getContext('2d');
@@ -25,7 +25,7 @@ if (canvas) {
             const x1 = cx + Math.sin(phase) * amplitude;
             const x2 = cx + Math.sin(phase + Math.PI) * amplitude;
 
-            // 연결선
+            // 연결선 그리기 [cite: 289]
             const alpha = 0.08 + Math.abs(Math.sin(phase)) * 0.07;
             ctx.beginPath();
             ctx.moveTo(x1, y);
@@ -33,14 +33,13 @@ if (canvas) {
             ctx.strokeStyle = `rgba(107, 143, 113, ${alpha})`;
             ctx.stroke();
 
-            // 점 1
+            // 점 그리기 (DNA 가닥) [cite: 290, 291, 292]
             const depth1 = (Math.sin(phase) + 1) / 2;
             ctx.beginPath();
             ctx.arc(x1, y, 2.5 + depth1 * 2, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(107, 143, 113, ${0.15 + depth1 * 0.35})`;
             ctx.fill();
 
-            // 점 2
             const depth2 = (Math.sin(phase + Math.PI) + 1) / 2;
             ctx.beginPath();
             ctx.arc(x2, y, 2.5 + depth2 * 2, 0, Math.PI * 2);
