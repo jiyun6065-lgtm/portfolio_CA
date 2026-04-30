@@ -11,7 +11,6 @@
   --grain-opacity: 0.03;
 }
 
-/* [기존 코드의 모든 CSS 내용이 여기에 위치합니다] */
 html {
   scroll-behavior: smooth;
   font-size: 16px;
@@ -25,7 +24,7 @@ body {
   overflow-x: hidden;
 }
 
-/* 필름 그레인 효과 */
+/* 필름 그레인 효과 [cite: 179] */
 body::after {
   content: '';
   position: fixed;
@@ -37,4 +36,22 @@ body::after {
   background-size: 128px 128px;
 }
 
-/* ... 나머지 CSS (nav, hero, section, animations 등) ... */
+/* 네비게이션 스타일 [cite: 182, 183] */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+nav.scrolled {
+  background: rgba(250, 247, 242, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ... 나머지 모든 CSS 스타일 코드 (Hero, Section, Animation 등) ... */
