@@ -345,67 +345,6 @@ section {
   border-radius: 2px;
 }
 
-/* INTERESTS */
-.interests { background: var(--bg); }
-
-.interests-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-.interest-card {
-  padding: 3rem;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  position: relative;
-  overflow: hidden;
-  background: var(--bg);
-}
-
-.interest-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-warm));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.5s ease;
-}
-
-.interest-card:hover {
-  border-color: var(--accent-light);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(44, 40, 36, 0.06);
-}
-
-.interest-card:hover::before { transform: scaleX(1); }
-
-.interest-icon {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 1.5rem;
-  position: relative;
-}
-
-.interest-card h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
-  font-weight: 400;
-  margin-bottom: 1rem;
-}
-
-.interest-card p {
-  font-size: 0.9rem;
-  color: var(--text-light);
-  line-height: 1.8;
-}
-
 /* RESEARCH SECTION */
 .research {
   padding: 80px 0;
